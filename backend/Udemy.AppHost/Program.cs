@@ -22,7 +22,7 @@ var ratingdb = postgres.AddDatabase("rating");
 
 #endregion
 
-#region Databases
+#region Service and Databases
 
 // Keycloak entegrasyonu
 var keycloak = builder.AddKeycloak("keycloak", 7070);
@@ -192,6 +192,5 @@ builder.AddNpmApp("frontend", @"C:\Users\abura\OneDrive\Desktop\Udemy\frontend",
     .WithExternalHttpEndpoints();
 
 #endregion
-
 
 builder.Build().Run();
