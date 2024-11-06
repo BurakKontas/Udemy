@@ -6,20 +6,25 @@ var builder = DistributedApplication.CreateBuilder(args);
 #region Postgres
 
 // PostgreSQL entegrasyonu
-var postgres = builder.AddPostgres("postgres")
-    .WithPgAdmin();
+var postgres = builder.AddPostgres("postgres");
 
 // PostgreSQL database entegrasyonu
-var supportdb = postgres.AddDatabase("support");
-var streamingdb = postgres.AddDatabase("streaming");
-var notificationdb = postgres.AddDatabase("notification");
-var lessondb = postgres.AddDatabase("lesson");
-var languagedb = postgres.AddDatabase("language");
-var coursedb = postgres.AddDatabase("course");
-var certificatedb = postgres.AddDatabase("certificate");
-var admindb = postgres.AddDatabase("admin");
-var paymentdb = postgres.AddDatabase("payment");
-var ratingdb = postgres.AddDatabase("rating");
+var supportdb = postgres.AddDatabase("supportdb");
+var streamingdb = postgres.AddDatabase("streamingdb");
+var notificationdb = postgres.AddDatabase("notificationdb");
+var lessondb = postgres.AddDatabase("lessondb");
+var languagedb = postgres.AddDatabase("languagedb");
+var coursedb = postgres.AddDatabase("coursedb");
+var certificatedb = postgres.AddDatabase("certificatedb");
+var admindb = postgres.AddDatabase("admindb");
+var paymentdb = postgres.AddDatabase("paymentdb");
+var ratingdb = postgres.AddDatabase("ratingdb");
+
+// PostgreSQL PGAdmin entegrasyonu
+postgres.WithPgAdmin();
+
+// PostgreSQL Volume entegrasyonu
+postgres.WithDataVolume("udemy-postgres");
 
 #endregion
 
@@ -28,26 +33,31 @@ var ratingdb = postgres.AddDatabase("rating");
 // Keycloak entegrasyonu
 var keycloak = builder.AddKeycloak("keycloak", 7070)
     .WithEnvironment("KEYCLOAK_ADMIN", "admin")
-    .WithEnvironment("KEYCLOAK_ADMIN_PASSWORD", "admin-password");
+    .WithEnvironment("KEYCLOAK_ADMIN_PASSWORD", "admin-password")
+    .WithDataVolume("udemy-keycloak");
 
 // Seq entegrasyonu
 var seq = builder.AddSeq("seq")
-    .ExcludeFromManifest();
+    .ExcludeFromManifest()
+    .WithDataVolume("udemy-seq");
 
 // Elasticsearch entegrasyonu
-var elastic = builder.AddElasticsearch("elastic");
+var elastic = builder.AddElasticsearch("elastic")
+    .WithDataVolume("udemy-elastic");
 
 // Redis entegrasyonu
 var redis = builder.AddRedis("cache")
-    .WithRedisCommander();
+    .WithRedisCommander()
+    .WithDataVolume("udemy-redis");
 
 // Kafka entegrasyonu
 var kafka = builder.AddKafka("kafka")
-    .WithKafkaUI();
+    .WithKafkaUI()
+    .WithDataVolume("udemy-kafka");
 
 // Azure Storage entegrasyonu
 var storage = builder.AddAzureStorage("storage")
-    .RunAsEmulator();
+    .RunAsEmulator(container => container.WithDataVolume("udemy-azure-storage"));
 
 var videodb = storage.AddBlobs("blobs");
 
