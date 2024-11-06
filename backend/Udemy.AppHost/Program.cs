@@ -18,6 +18,8 @@ var certificatedb = postgres.AddDatabase("certificatedb");
 var admindb = postgres.AddDatabase("admindb");
 var paymentdb = postgres.AddDatabase("paymentdb");
 var ratingdb = postgres.AddDatabase("ratingdb");
+var userdb = postgres.AddDatabase("userdb");
+
 // PostgreSQL PGAdmin entegrasyonu
 postgres.WithPgAdmin();
 // PostgreSQL Volume entegrasyonu
@@ -26,12 +28,6 @@ postgres.WithDataVolume("udemy-postgres");
 #endregion
 
 #region Service and Databases
-
-// Keycloak entegrasyonu
-var keycloak = builder.AddKeycloak("keycloak", 7070)
-    .WithEnvironment("KEYCLOAK_ADMIN", "admin")
-    .WithEnvironment("KEYCLOAK_ADMIN_PASSWORD", "admin-password")
-    .WithDataVolume("udemy-keycloak");
 
 // Seq entegrasyonu
 var seq = builder.AddSeq("seq")
@@ -66,7 +62,7 @@ var user = builder.AddProject<Udemy_User_API>("udemy-user-api")
     .WithReference(kafka)
     .WithReference(redis)
     .WithReference(seq)
-    .WithReference(keycloak)
+    .WithReference(userdb)
     .WithReference(elastic);
 
 #endregion
