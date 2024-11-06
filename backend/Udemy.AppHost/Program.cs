@@ -9,7 +9,6 @@ var builder = DistributedApplication.CreateBuilder(args);
 var postgres = builder.AddPostgres("postgres");
 
 // PostgreSQL database entegrasyonu
-var userdb = postgres.AddDatabase("user");
 var supportdb = postgres.AddDatabase("support");
 var streamingdb = postgres.AddDatabase("streaming");
 var notificationdb = postgres.AddDatabase("notification");
@@ -19,6 +18,7 @@ var coursedb = postgres.AddDatabase("course");
 var certificatedb = postgres.AddDatabase("certificate");
 var admindb = postgres.AddDatabase("admin");
 var paymentdb = postgres.AddDatabase("payment");
+var ratingdb = postgres.AddDatabase("rating");
 
 #endregion
 
@@ -56,8 +56,8 @@ var user = builder.AddProject<Udemy_User_API>("udemy-user-api")
     .WithReference(kafka)
     .WithReference(redis)
     .WithReference(seq)
-    .WithReference(userdb)
-    .WithReference(keycloak);
+    .WithReference(keycloak)
+    .WithReference(elastic);
 
 #endregion
 
@@ -151,6 +151,26 @@ var payment = builder.AddProject<Udemy_Payment_API>("udemy-payment-api")
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(paymentdb);
+
+#endregion
+
+#region Rating
+
+builder.AddProject<Udemy_Rating_API>("udemy-rating-api")
+    .WithReference(kafka)
+    .WithReference(redis)
+    .WithReference(seq)
+    .WithReference(ratingdb);
+
+#endregion
+
+#region Search
+
+builder.AddProject<Udemy_Search_API>("udemy-search-api")
+    .WithReference(kafka)
+    .WithReference(redis)
+    .WithReference(seq)
+    .WithReference(elastic);
 
 #endregion
 

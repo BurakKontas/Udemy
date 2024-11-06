@@ -33,6 +33,8 @@
 	    <ProjectReference Include="..\Udemy.Lesson\Udemy.Lesson.API\Udemy.Lesson.API.csproj" />
 	    <ProjectReference Include="..\Udemy.Notification\Udemy.Notification.API\Udemy.Notification.API.csproj" />
 	    <ProjectReference Include="..\Udemy.Payment\Udemy.Payment.API\Udemy.Payment.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Rating\Udemy.Rating.API\Udemy.Rating.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Search\Udemy.Search.API\Udemy.Search.API.csproj" />
 	    <ProjectReference Include="..\Udemy.Streaming\Udemy.Streaming.API\Udemy.Streaming.API.csproj" />
 	    <ProjectReference Include="..\Udemy.Support\Udemy.Support.API\Udemy.Support.API.csproj" />
 	    <ProjectReference Include="..\Udemy.User\Udemy.User.API\Udemy.User.API.csproj" />
