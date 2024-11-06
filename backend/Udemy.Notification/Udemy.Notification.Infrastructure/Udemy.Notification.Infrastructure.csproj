@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Udemy.Notification.Domain\Udemy.Notification.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
