@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Udemy.Admin.Domain\Udemy.Admin.Domain.csproj" />
-    <ProjectReference Include="..\Udemy.Admin.Infrastructure\Udemy.Admin.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
