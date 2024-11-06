@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	  <PropertyGroup>
 	    <OutputType>Exe</OutputType>
@@ -10,9 +10,32 @@
 	  </PropertyGroup>
 
 	  <ItemGroup>
-	    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+	    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Azure.Search" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Azure.ServiceBus" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Dapr" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Elasticsearch" Version="8.1.0-preview.1.24373.2" />
+	    <PackageReference Include="Aspire.Hosting.Kafka" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Keycloak" Version="8.1.0-preview.1.24373.2" />
 	    <PackageReference Include="Aspire.Hosting.NodeJs" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.Orleans" Version="8.1.0" />
+	    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.1.0" />
 	    <PackageReference Include="Aspire.Hosting.Redis" Version="8.0.0" />
+	    <PackageReference Include="Aspire.Hosting.Seq" Version="8.1.0" />
+	  </ItemGroup>
+
+	  <ItemGroup>
+	    <ProjectReference Include="..\Udemy.Admin\Udemy.Admin.API\Udemy.Admin.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Certificate\Udemy.Certificate.API\Udemy.Certificate.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Course\Udemy.Course.API\Udemy.Course.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Language\Udemy.Language.API\Udemy.Language.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Lesson\Udemy.Lesson.API\Udemy.Lesson.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Notification\Udemy.Notification.API\Udemy.Notification.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Payment\Udemy.Payment.API\Udemy.Payment.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Streaming\Udemy.Streaming.API\Udemy.Streaming.API.csproj" />
+	    <ProjectReference Include="..\Udemy.Support\Udemy.Support.API\Udemy.Support.API.csproj" />
+	    <ProjectReference Include="..\Udemy.User\Udemy.User.API\Udemy.User.API.csproj" />
 	  </ItemGroup>
 
 </Project>

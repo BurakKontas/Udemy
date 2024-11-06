@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Udemy.Tests;
+namespace Udemy.Tests.Web;
 
 public class WebTests
 {
@@ -13,7 +13,7 @@ public class WebTests
         await app.StartAsync();
 
         // Act
-        var httpClient = app.CreateHttpClient("webfrontend");
+        var httpClient = app.CreateHttpClient("frontend");
         var response = await httpClient.GetAsync("/");
 
         // Assert
