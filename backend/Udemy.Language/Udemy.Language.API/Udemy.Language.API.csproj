@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Udemy.ServiceDefaults\Udemy.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Udemy.Language.Application\Udemy.Language.Application.csproj" />
+    <ProjectReference Include="..\Udemy.Language.Domain\Udemy.Language.Domain.csproj" />
+    <ProjectReference Include="..\Udemy.Language.Infrastructure\Udemy.Language.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
