@@ -6,7 +6,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 #region Postgres
 
 // PostgreSQL entegrasyonu
-var postgres = builder.AddPostgres("postgres");
+var postgres = builder.AddPostgres("postgres")
+    .WithPgAdmin();
 
 // PostgreSQL database entegrasyonu
 var supportdb = postgres.AddDatabase("support");
@@ -25,7 +26,9 @@ var ratingdb = postgres.AddDatabase("rating");
 #region Service and Databases
 
 // Keycloak entegrasyonu
-var keycloak = builder.AddKeycloak("keycloak", 7070);
+var keycloak = builder.AddKeycloak("keycloak", 7070)
+    .WithEnvironment("KEYCLOAK_ADMIN", "admin")
+    .WithEnvironment("KEYCLOAK_ADMIN_PASSWORD", "admin-password");
 
 // Seq entegrasyonu
 var seq = builder.AddSeq("seq")
