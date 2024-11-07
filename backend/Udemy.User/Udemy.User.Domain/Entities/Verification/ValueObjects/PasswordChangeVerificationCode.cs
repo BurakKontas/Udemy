@@ -28,7 +28,7 @@ public class PasswordChangeVerificationCode
     {
         var isValid = Verify(code);
         if (!isValid)
-            return Result.Failure<PasswordChangeVerificationCode>("Code is not valid.");
+            return Result<PasswordChangeVerificationCode>.Failure("Code is not valid.");
 
         return Result<PasswordChangeVerificationCode>.Success(new PasswordChangeVerificationCode(code));
     }

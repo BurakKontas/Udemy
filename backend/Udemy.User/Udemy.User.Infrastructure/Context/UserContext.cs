@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Udemy.Common.Primitives;
+using Udemy.User.Domain.Entities.Verification;
 
 namespace Udemy.User.Infrastructure.Context;
 
@@ -10,6 +11,8 @@ public class UserContext(DbContextOptions<UserContext> options, IPublishEndpoint
     private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
 
     public DbSet<Domain.Entities.User.User> Users { get; set; }
+    public DbSet<EmailVerification> EmailVerifications { get; set; }
+    public DbSet<PasswordChangeVerification> PasswordChangeVerifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
