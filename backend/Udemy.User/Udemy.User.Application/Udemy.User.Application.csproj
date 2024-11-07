@@ -12,6 +12,7 @@
     <PackageReference Include="HotChocolate.Types.CursorPagination" Version="14.0.0" />
     <PackageReference Include="HotChocolate.Types.Filters" Version="13.9.14" />
     <PackageReference Include="HotChocolate.Types.Mutations" Version="14.0.0" />
+    <PackageReference Include="MassTransit.Abstractions" Version="8.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
@@ -20,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Consumers\" />
-    <Folder Include="Producers\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

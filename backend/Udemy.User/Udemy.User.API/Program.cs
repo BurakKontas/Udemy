@@ -11,7 +11,7 @@ builder.AddInfrastructure();
 builder.Services.AddProblemDetails();
 builder.Services.AddAPI();
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddAuthorization();
 

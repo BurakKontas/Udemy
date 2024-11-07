@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using MassTransit;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Udemy.Common.Security.AuthenticationHandlers;
 using Udemy.Common.Security.PermissionAuthorizeAttribute;
+using Udemy.User.Application;
 using Udemy.User.Domain.Interfaces;
 using Udemy.User.Infrastructure.Context;
 using Udemy.User.Infrastructure.Repositories;
@@ -13,10 +16,11 @@ namespace Udemy.User.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IUserRepository, UserRepository>();
         AddPermissionsAuthentication(services);
+        DefineMassTransit(services, configuration);
 
         return services;
     }
@@ -24,7 +28,6 @@ public static class DependencyInjection
     public static WebApplicationBuilder AddInfrastructure(this WebApplicationBuilder builder)
     {
         AddPostgres(builder);
-        AddKafka(builder);
         AddSeq(builder);
 
         return builder;
@@ -42,6 +45,25 @@ public static class DependencyInjection
         .AddScheme<AuthenticationSchemeOptions, PermissionAuthenticationHandler>("PermissionAuthentication", options => { });
     }
 
+    private static void DefineMassTransit(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddMassTransit(busConfigurator =>
+        {
+            busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+            busConfigurator.AddConsumers(ApplicationAssembly.Assembly);
+
+            busConfigurator.UsingRabbitMq((context, cfg) =>
+            {
+                cfg.Host(configuration.GetConnectionString("rabbitmq"));
+
+                cfg.UseInMemoryOutbox(context);
+
+                cfg.ConfigureEndpoints(context);
+            });
+        });
+    }
+
     private static void AddPostgres(WebApplicationBuilder builder)
     {
         builder.AddNpgsqlDbContext<UserContext>(connectionName: "userdb");
@@ -51,12 +73,6 @@ public static class DependencyInjection
                 settings.DisableRetry = false;
                 settings.CommandTimeout = 30;
             });
-    }
-
-    private static void AddKafka(WebApplicationBuilder builder)
-    {
-        builder.AddKafkaConsumer<string, string>("kafka");
-        builder.AddKafkaProducer<string, string>("kafka");
     }
 
     private static void AddSeq(WebApplicationBuilder builder)

@@ -44,9 +44,9 @@ var redis = builder.AddRedis("cache")
     .WithDataVolume("udemy-redis");
 
 // Kafka entegrasyonu
-var kafka = builder.AddKafka("kafka")
-    .WithKafkaUI()
-    .WithDataVolume("udemy-kafka");
+var rabbitmq = builder.AddRabbitMQ("rabbitmq")
+    .WithManagementPlugin()
+    .WithDataVolume("udemy-rabbitmq");
 
 // Azure Storage entegrasyonu
 var storage = builder.AddAzureStorage("storage")
@@ -59,7 +59,7 @@ var videodb = storage.AddBlobs("blobs");
 #region User
 
 var user = builder.AddProject<Udemy_User_API>("udemy-user-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(userdb)
@@ -70,7 +70,7 @@ var user = builder.AddProject<Udemy_User_API>("udemy-user-api")
 #region Support
 
 var support = builder.AddProject<Udemy_Support_API>("udemy-support-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(supportdb);
@@ -80,7 +80,7 @@ var support = builder.AddProject<Udemy_Support_API>("udemy-support-api")
 #region Streaming
 
 var streaming = builder.AddProject<Udemy_Streaming_API>("udemy-streaming-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(streamingdb)
@@ -91,7 +91,7 @@ var streaming = builder.AddProject<Udemy_Streaming_API>("udemy-streaming-api")
 #region Notification
 
 var notification = builder.AddProject<Udemy_Notification_API>("udemy-notification-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(notificationdb);
@@ -101,7 +101,7 @@ var notification = builder.AddProject<Udemy_Notification_API>("udemy-notificatio
 #region Lesson
 
 var lesson = builder.AddProject<Udemy_Lesson_API>("udemy-lesson-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(lessondb);
@@ -111,7 +111,7 @@ var lesson = builder.AddProject<Udemy_Lesson_API>("udemy-lesson-api")
 #region Language
 
 var language = builder.AddProject<Udemy_Language_API>("udemy-language-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(languagedb);
@@ -121,7 +121,7 @@ var language = builder.AddProject<Udemy_Language_API>("udemy-language-api")
 #region Course
 
 var course = builder.AddProject<Udemy_Course_API>("udemy-course-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(coursedb)
@@ -133,7 +133,7 @@ var course = builder.AddProject<Udemy_Course_API>("udemy-course-api")
 #region Certificate
 
 var certificate = builder.AddProject<Udemy_Certificate_API>("udemy-certificate-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(certificatedb);
@@ -143,7 +143,7 @@ var certificate = builder.AddProject<Udemy_Certificate_API>("udemy-certificate-a
 #region Admin
 
 var admin = builder.AddProject<Udemy_Admin_API>("udemy-admin-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(admindb);
@@ -153,7 +153,7 @@ var admin = builder.AddProject<Udemy_Admin_API>("udemy-admin-api")
 #region Payment
 
 var payment = builder.AddProject<Udemy_Payment_API>("udemy-payment-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(paymentdb);
@@ -163,7 +163,7 @@ var payment = builder.AddProject<Udemy_Payment_API>("udemy-payment-api")
 #region Rating
 
 builder.AddProject<Udemy_Rating_API>("udemy-rating-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(ratingdb);
@@ -173,7 +173,7 @@ builder.AddProject<Udemy_Rating_API>("udemy-rating-api")
 #region Search
 
 builder.AddProject<Udemy_Search_API>("udemy-search-api")
-    .WithReference(kafka)
+    .WithReference(rabbitmq)
     .WithReference(redis)
     .WithReference(seq)
     .WithReference(elastic);

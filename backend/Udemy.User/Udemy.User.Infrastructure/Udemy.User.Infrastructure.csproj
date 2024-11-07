@@ -8,14 +8,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Udemy.Common\Udemy.Common.Security\Udemy.Common.Security.csproj" />
+    <ProjectReference Include="..\Udemy.User.Application\Udemy.User.Application.csproj" />
     <ProjectReference Include="..\Udemy.User.Domain\Udemy.User.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Confluent.Kafka" Version="8.1.0" />
     <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.1.0" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="8.1.0" />
     <PackageReference Include="Aspire.Seq" Version="8.1.0" />
     <PackageReference Include="HotChocolate.Authorization" Version="14.1.0" />
+    <PackageReference Include="MassTransit" Version="8.3.0" />
+    <PackageReference Include="MassTransit.Kafka" Version="8.3.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.10" />
   </ItemGroup>
