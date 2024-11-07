@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Udemy.Common\Udemy.Common.Masstransit\Udemy.Common.Masstransit.csproj" />
     <ProjectReference Include="..\..\Udemy.Common\Udemy.Common.Security\Udemy.Common.Security.csproj" />
     <ProjectReference Include="..\Udemy.User.Application\Udemy.User.Application.csproj" />
     <ProjectReference Include="..\Udemy.User.Domain\Udemy.User.Domain.csproj" />

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Udemy.Common.Masstransit;
 using Udemy.Common.Security.AuthenticationHandlers;
 using Udemy.Common.Security.PermissionAuthorizeAttribute;
 using Udemy.User.Application;
@@ -47,21 +48,11 @@ public static class DependencyInjection
 
     private static void DefineMassTransit(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddMassTransit(busConfigurator =>
-        {
-            busConfigurator.SetKebabCaseEndpointNameFormatter();
+        var connectionString = configuration.GetConnectionString("rabbitmq");
+        if (connectionString == null)
+            throw new ArgumentNullException($"RabbitMQ connection string is not set.");
 
-            busConfigurator.AddConsumers(ApplicationAssembly.Assembly);
-
-            busConfigurator.UsingRabbitMq((context, cfg) =>
-            {
-                cfg.Host(configuration.GetConnectionString("rabbitmq"));
-
-                cfg.UseInMemoryOutbox(context);
-
-                cfg.ConfigureEndpoints(context);
-            });
-        });
+        MasstransitInjection.DefineMassTransit(services, connectionString, ApplicationAssembly.Assembly);
     }
 
     private static void AddPostgres(WebApplicationBuilder builder)

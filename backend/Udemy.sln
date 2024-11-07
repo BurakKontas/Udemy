@@ -132,9 +132,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Admin.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Admin.Domain", "Udemy.Admin\Udemy.Admin.Domain\Udemy.Admin.Domain.csproj", "{DDDF87FB-331A-45C9-BCDD-B5493751B7BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.Common.Security", "Udemy.Common\Udemy.Common.Security\Udemy.Common.Security.csproj", "{5A280C9A-A8A3-44A3-8905-3A468C97B023}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Common.Security", "Udemy.Common\Udemy.Common.Security\Udemy.Common.Security.csproj", "{5A280C9A-A8A3-44A3-8905-3A468C97B023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.Common.Result", "Udemy.Common\Udemy.Common.Result\Udemy.Common.Result.csproj", "{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Common.Result", "Udemy.Common\Udemy.Common.Result\Udemy.Common.Result.csproj", "{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.Common.Masstransit", "Udemy.Common\Udemy.Common.Masstransit\Udemy.Common.Masstransit.csproj", "{291BB610-0EAB-43A8-9DC2-245F92169A93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -358,6 +360,10 @@ Global
 		{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291BB610-0EAB-43A8-9DC2-245F92169A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291BB610-0EAB-43A8-9DC2-245F92169A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291BB610-0EAB-43A8-9DC2-245F92169A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291BB610-0EAB-43A8-9DC2-245F92169A93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -414,6 +420,7 @@ Global
 		{DDDF87FB-331A-45C9-BCDD-B5493751B7BA} = {53B6CC7D-9E67-4BBD-BB0D-937A60FC52D8}
 		{5A280C9A-A8A3-44A3-8905-3A468C97B023} = {29BBE3A0-A765-40F2-98B5-7811E3C54E47}
 		{BA709F0B-41B2-4F2E-B0D6-D9DE49D15309} = {29BBE3A0-A765-40F2-98B5-7811E3C54E47}
+		{291BB610-0EAB-43A8-9DC2-245F92169A93} = {29BBE3A0-A765-40F2-98B5-7811E3C54E47}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1258B9F6-8174-48C0-A3B9-EAD247649970}
