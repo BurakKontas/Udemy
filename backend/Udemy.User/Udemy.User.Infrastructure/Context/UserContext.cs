@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Udemy.Common.Primitives;
 
 namespace Udemy.User.Infrastructure.Context;
