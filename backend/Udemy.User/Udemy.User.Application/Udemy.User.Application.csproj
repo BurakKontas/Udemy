@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Udemy.User.Domain\Udemy.User.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

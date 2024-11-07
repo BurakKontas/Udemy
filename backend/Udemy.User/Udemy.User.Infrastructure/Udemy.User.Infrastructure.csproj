@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Udemy.Common\Udemy.Common.Security\Udemy.Common.Security.csproj" />
     <ProjectReference Include="..\Udemy.User.Domain\Udemy.User.Domain.csproj" />
   </ItemGroup>
 
@@ -14,6 +15,10 @@
     <PackageReference Include="HotChocolate.Authorization" Version="14.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
