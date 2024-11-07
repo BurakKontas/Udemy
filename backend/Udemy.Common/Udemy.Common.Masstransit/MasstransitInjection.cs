@@ -7,7 +7,7 @@ namespace Udemy.Common.Masstransit;
 
 public static class MasstransitInjection
 {
-    public static void DefineMassTransit(IServiceCollection services, string connectionString, Assembly assembly)
+    public static void InjectMasstransit(this IServiceCollection services, string connectionString, Assembly assembly)
     {
         services.AddMassTransit(busConfigurator =>
         {
