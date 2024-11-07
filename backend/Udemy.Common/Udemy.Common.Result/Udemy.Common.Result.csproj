@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Udemy.Common\Udemy.Common.Result\Udemy.Common.Result.csproj" />
-  </ItemGroup>
-
 </Project>

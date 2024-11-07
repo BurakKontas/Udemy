@@ -5,14 +5,15 @@ using Udemy.User.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+builder.AddInfrastructure();
+
 builder.Services.AddProblemDetails();
 builder.Services.AddAPI();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 builder.Services.AddAuthorization();
-
-builder.AddServiceDefaults();
 
 var app = builder.Build();
 
