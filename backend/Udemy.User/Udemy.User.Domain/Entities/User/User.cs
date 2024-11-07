@@ -3,11 +3,13 @@ using Udemy.User.Domain.Entities.User.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Udemy.Common.Primitives;
 using Udemy.Common.Result;
+using Udemy.User.Domain.Entities.User.DomainEvents;
 
 namespace Udemy.User.Domain.Entities.User;
 
-public class User
+public class User : Entity
 {
     public Guid Id { get; private set; }
     public Name Name { get; private set; }
@@ -46,6 +48,9 @@ public class User
         if (avatarResult.IsFailure) return Result<User>.Failure(avatarResult.Message);
 
         var newUser = new User(nameResult.Value, emailResult.Value, passwordResult.Value, avatarResult.Value, biography);
+
+        newUser.Arise(new UserCreatedDomainEvent(newUser.Id));
+
         return Result<User>.Success(newUser, "User created successfully.");
     }
 
@@ -56,6 +61,9 @@ public class User
         if (nameResult.IsFailure) return Result.Failure(nameResult.Message);
 
         Name = nameResult.Value;
+
+        Arise(new UserNameUpdatedDomainEvent(Id, newName));
+
         return Result.Success("Name updated successfully.");
     }
 
@@ -65,18 +73,28 @@ public class User
         if (emailResult.IsFailure) return Result.Failure(emailResult.Message);
 
         Email = emailResult.Value;
+
+        Arise(new UserEmailUpdatedDomainEvent(Id, newEmail));
+
         return Result.Success("Email updated successfully.");
     }
 
     public Result UpdateAvatar(Url newAvatarUrl)
     {
         AvatarUrl = newAvatarUrl;
+
+        Arise(new UserAvatarUpdatedDomainEvent(Id, newAvatarUrl.ToString()));
+
         return Result.Success("Avatar updated successfully.");
     }
 
-    public void UpdateBiography(string biography)
+    public Result UpdateBiography(string biography)
     {
         Biography = biography;
+
+        Arise(new UserBiographyUpdatedDomainEvent(Id, biography));
+
+        return Result.Success();
     }
 
     public Result AddSocialMedia(SocialMedia socialMedia)
@@ -86,6 +104,9 @@ public class User
             return Result.Failure("Social media already exists.");
 
         SocialMedias.Add(socialMedia);
+
+        Arise(new SocialMediaAddedDomainEvent(Id, socialMedia.Media.ToString()));
+
         return Result.Success("Social media added successfully.");
     }
 
@@ -95,12 +116,19 @@ public class User
         if (passwordResult.IsFailure) return Result.Failure(passwordResult.Message);
 
         PasswordHash = passwordResult.Value;
+
+        Arise(new UserPasswordChangedDomainEvent(Id));
+
         return Result.Success("Password changed successfully.");
     }
 
-    public void AssignRole(Role newRole)
+    public Result AssignRole(Role newRole)
     {
         Role = newRole;
+
+        Arise(new UserRoleAssignedDomainEvent(Id, newRole));
+
+        return Result.Success();
     }
 
     public Result AddIdentityProvider(IdentityProvider newIdentityProvider)
@@ -109,6 +137,9 @@ public class User
             return Result.Failure("Identity provider already exists.");
 
         IdentityProviders.Add(newIdentityProvider);
+
+        Arise(new IdentityProviderAddedDomainEvent(Id, newIdentityProvider.Provider.ToString()));
+
         return Result.Success("Identity provider added successfully.");
     }
 }
