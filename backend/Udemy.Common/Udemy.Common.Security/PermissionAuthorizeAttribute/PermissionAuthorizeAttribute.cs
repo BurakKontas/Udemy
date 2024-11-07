@@ -1,7 +1,7 @@
 ﻿
 using HotChocolate.Authorization;
 
-namespace Udemy.User.Infrastructure.PermissionAuthorizeAttribute;
+namespace Udemy.Common.Security.PermissionAuthorizeAttribute;
 
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
 public class PermissionAuthorizeAttribute : AuthorizeAttribute

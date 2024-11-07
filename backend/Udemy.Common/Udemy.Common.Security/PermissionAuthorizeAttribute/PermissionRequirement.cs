@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Udemy.User.Infrastructure.PermissionAuthorizeAttribute;
+namespace Udemy.Common.Security.PermissionAuthorizeAttribute;
 
 public class PermissionRequirement(Permissions[] permission, PermissionMode mode) : IAuthorizationRequirement
 {

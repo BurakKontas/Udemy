@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace Udemy.User.Infrastructure.PermissionAuthorizeAttribute;
+namespace Udemy.Common.Security.PermissionAuthorizeAttribute;
 
 public class PermissionsAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options)
     : DefaultAuthorizationPolicyProvider(options)

@@ -1,4 +1,4 @@
-﻿namespace Udemy.User.Infrastructure.PermissionAuthorizeAttribute;
+﻿namespace Udemy.Common.Security.PermissionAuthorizeAttribute;
 
 public enum Permissions
 {

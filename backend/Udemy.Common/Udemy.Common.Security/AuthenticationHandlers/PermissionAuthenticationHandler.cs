@@ -1,21 +1,21 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
-using Udemy.User.Infrastructure.PermissionAuthorizeAttribute;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Udemy.Common.Security.PermissionAuthorizeAttribute;
 
-namespace Udemy.User.Infrastructure.AuthenticationHandlers;
+namespace Udemy.Common.Security.AuthenticationHandlers;
 
 public class PermissionAuthenticationHandler(
     IOptionsMonitor<AuthenticationSchemeOptions> options,
     ILoggerFactory logger,
-    UrlEncoder encoder,
-    ISystemClock clock)
-    : AuthenticationHandler<AuthenticationSchemeOptions>(options, logger, encoder, clock)
+    UrlEncoder encoder)
+    : AuthenticationHandler<AuthenticationSchemeOptions>(options, logger, encoder)
 {
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
+        //TimeProvider.LocalTimeZone;
         var identity = new ClaimsIdentity();
         var principal = new ClaimsPrincipal(identity);
         var permissions = new List<Claim>
