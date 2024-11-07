@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Udemy.Common.Masstransit;
 using Udemy.Common.Security.AuthenticationHandlers;
 using Udemy.Common.Security.PermissionAuthorizeAttribute;
@@ -30,6 +32,7 @@ public static class DependencyInjection
     {
         AddPostgres(builder);
         AddSeq(builder);
+        ApplyMigrations(builder);
 
         return builder;
     }
@@ -52,7 +55,7 @@ public static class DependencyInjection
         if (connectionString == null)
             throw new ArgumentNullException($"RabbitMQ connection string is not set.");
 
-        MasstransitInjection.DefineMassTransit(services, connectionString, ApplicationAssembly.Assembly);
+        services.InjectMasstransit(connectionString, ApplicationAssembly.Assembly);
     }
 
     private static void AddPostgres(WebApplicationBuilder builder)
@@ -64,6 +67,23 @@ public static class DependencyInjection
                 settings.DisableRetry = false;
                 settings.CommandTimeout = 30;
             });
+    }
+
+    private static void ApplyMigrations(WebApplicationBuilder builder)
+    {
+        var scope = builder.Services.BuildServiceProvider().CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<UserContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+
+        try
+        {
+            context.Database.Migrate();
+            logger.LogInformation("Migrations applied successfully.");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while applying migrations.");
+        }
     }
 
     private static void AddSeq(WebApplicationBuilder builder)
