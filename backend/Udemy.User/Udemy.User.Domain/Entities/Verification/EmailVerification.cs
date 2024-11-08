@@ -26,7 +26,7 @@ public class EmailVerification : Entity
         IsVerified = false;
     }
 
-    public Result<EmailVerification> Create(string email, DateTime expirationTime)
+    public static Result<EmailVerification> Create(string email, DateTime expirationTime)
     {
         var emailOneTimeCode = EmailOneTimeCode.Create().Value;
         var emailVerificationCode = EmailVerificationCode.Create().Value;

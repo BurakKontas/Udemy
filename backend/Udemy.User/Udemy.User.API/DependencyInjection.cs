@@ -1,4 +1,6 @@
-﻿using Udemy.User.API.Controllers;
+﻿using Udemy.User.API.Controllers.EmailVerification;
+using Udemy.User.API.Controllers.PasswordVerification;
+using Udemy.User.API.Controllers.User;
 
 namespace Udemy.User.API;
 
@@ -18,8 +20,12 @@ public static class DependencyInjection
             .AddAuthorization()
             .AddQueryType()
                 .AddTypeExtension<UserQueryController>()
+                .AddTypeExtension<EmailVerificationQueryController>()
+                .AddTypeExtension<PasswordChangeVerificationQueryController>()
             .AddMutationType()
                 .AddTypeExtension<UserMutationController>()
+                .AddTypeExtension<EmailVerificationMutationController>()
+                .AddTypeExtension<PasswordChangeVerificationMutationController>()
             .ModifyPagingOptions(x =>
             {
                 x.DefaultPageSize = 10;
