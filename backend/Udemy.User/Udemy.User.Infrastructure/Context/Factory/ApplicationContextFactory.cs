@@ -11,6 +11,6 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
         optionsBuilder.UseNpgsql();
 
-        return new ApplicationContext(optionsBuilder.Options, null!);
+        return new ApplicationContext(optionsBuilder.Options);
     }
 }

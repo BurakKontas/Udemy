@@ -6,9 +6,16 @@ using Udemy.User.Domain.Entities.Verification;
 
 namespace Udemy.User.Infrastructure.Context;
 
-public class ApplicationContext(DbContextOptions<ApplicationContext> options, IPublishEndpoint publishEndpoint) : DbContext(options)
+public class ApplicationContext : DbContext
 {
-    private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
+    private readonly IPublishEndpoint _publishEndpoint;
+
+    public ApplicationContext(DbContextOptions<ApplicationContext> options, IPublishEndpoint publishEndpoint) : base(options)
+    {
+        _publishEndpoint = publishEndpoint;
+    }
+
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
     public DbSet<Domain.Entities.User.User> Users { get; set; }
     public DbSet<EmailVerification> EmailVerifications { get; set; }

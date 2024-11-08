@@ -13,6 +13,7 @@ using Udemy.Common.Security.PermissionAuthorizeAttribute;
 using Udemy.User.Application;
 using Udemy.User.Domain.Interfaces;
 using Udemy.User.Infrastructure.Context;
+using Udemy.User.Infrastructure.Context.Factory;
 using Udemy.User.Infrastructure.Repositories;
 
 namespace Udemy.User.Infrastructure;
@@ -22,6 +23,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddLogging();
         AddPermissionsAuthentication(services);
         DefineMassTransit(services, configuration);
 
@@ -60,8 +62,8 @@ public static class DependencyInjection
 
     private static void AddPostgres(WebApplicationBuilder builder)
     {
-        builder.AddNpgsqlDbContext<UserContext>(connectionName: "userdb");
-        builder.EnrichNpgsqlDbContext<UserContext>(
+        builder.AddNpgsqlDbContext<ApplicationContext>(connectionName: "userdb");
+        builder.EnrichNpgsqlDbContext<ApplicationContext>(
             configureSettings: settings =>
             {
                 settings.DisableRetry = false;
@@ -69,11 +71,14 @@ public static class DependencyInjection
             });
     }
 
+    private class MigrationLogger { }
+
     private static void ApplyMigrations(WebApplicationBuilder builder)
     {
         var scope = builder.Services.BuildServiceProvider().CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<UserContext>();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<MigrationLogger>>();
+        var contextFactory = new ApplicationContextFactory();
+        var context = contextFactory.CreateDbContext([]);
 
         try
         {
