@@ -6,7 +6,7 @@ using Udemy.User.Domain.Entities.Verification;
 
 namespace Udemy.User.Infrastructure.Context;
 
-public class UserContext(DbContextOptions<UserContext> options, IPublishEndpoint publishEndpoint) : DbContext(options)
+public class ApplicationContext(DbContextOptions<ApplicationContext> options, IPublishEndpoint publishEndpoint) : DbContext(options)
 {
     private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
 
@@ -16,7 +16,7 @@ public class UserContext(DbContextOptions<UserContext> options, IPublishEndpoint
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 

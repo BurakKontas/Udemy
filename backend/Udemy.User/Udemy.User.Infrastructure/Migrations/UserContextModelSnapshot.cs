@@ -10,7 +10,7 @@ using Udemy.User.Infrastructure.Context;
 
 namespace Udemy.User.Infrastructure.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(ApplicationContext))]
     partial class UserContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ using Udemy.User.Infrastructure.Context;
 
 namespace Udemy.User.Infrastructure.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20241107173138_InitialMigration")]
     partial class InitialMigration
     {

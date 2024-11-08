@@ -11,7 +11,7 @@ using Udemy.User.Infrastructure.Context;
 
 namespace Udemy.User.Infrastructure.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20241107212842_AddVerifications")]
     partial class AddVerifications
     {
